@@ -85,7 +85,7 @@ DATABASES = {
                 'NAME': 'cmkj_website',
                 'USER': 'sean',
                 'PASSWORD': '123456',
-                'HOST': '192.168.0.104',
+                'HOST': '192.168.0.101',
                 'PORT': 3306,
     }
 }
