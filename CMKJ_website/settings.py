@@ -83,9 +83,9 @@ DATABASES = {
     'default': {
                 'ENGINE': 'django.db.backends.mysql',
                 'NAME': 'cmkj_website',
-                'USER': 'sean',
-                'PASSWORD': '123456',
-                'HOST': '192.168.0.101',
+                'USER': 'cmkj_website',
+                'PASSWORD': 'cmkj_website',
+                'HOST': '39.107.116.88',
                 'PORT': 3306,
     }
 }
