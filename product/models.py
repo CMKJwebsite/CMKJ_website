@@ -34,11 +34,11 @@ class Product(models.Model):
     产品表
     """
     p_name = models.CharField(verbose_name='产品名称', max_length=50, default='')
-    p_category_name = models.ManyToManyField(ProductCategory)
     p_price = models.DecimalField(verbose_name='产品价格', max_digits=7, decimal_places=2, default=0)
     p_introduction = models.CharField(verbose_name='产品介绍', max_length=250, default='')
     p_details = models.CharField(verbose_name='产品详情', max_length=250, default='')
     p_picture = models.ImageField(verbose_name='产品图片', upload_to='Stage/Project/CMKJ_website/static/images')
+    p_category_name = models.ManyToManyField(to=ProductCategory, related_name='category_name')
 
     class Meta:
         db_table = 'Product'

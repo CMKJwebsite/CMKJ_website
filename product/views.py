@@ -19,14 +19,11 @@ def view_product(request):
 
 def view_product_category(request):
     category = request.GET['category']
-    category_obj = ProductCategory.objects.filter(c_category_name=category).first().id
-    # s = Product.objects.filter(id=category_obj)
-    print(category_obj)
-    # print(type(category_obj))
-    # print(s)
-    # s = category_obj.
-    # product_category = Product.objects.filter(p_category_name=category)
-    # json_str = serializers.serialize("json", product_category)
-    # json_str = serializers.serialize("json", category_obj)
-    # return HttpResponse(json_str)
-    return render(request, 'product.html', locals())
+    # category_obj = ProductCategory.objects.get(c_category_name=category).category_name.all()
+    # json_category_obj = serializers.serialize('json', category_obj)
+    # category_obj = Product.objects.filter(p_category_name=ProductCategory.objects.get(c_category_name=category))
+    # json_category_obj = serializers.serialize('json', category_obj)
+    category_obj = ProductCategory.objects.get(c_category_name=category).category_name.all()
+    json_category_obj = serializers.serialize('json', category_obj)
+    return HttpResponse(json_category_obj, "application/json")
+    # return render(request, 'product.html', locals())
