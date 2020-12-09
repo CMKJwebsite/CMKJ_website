@@ -27,3 +27,10 @@ def view_product_category(request):
     json_category_obj = serializers.serialize('json', category_obj)
     return HttpResponse(json_category_obj, "application/json")
     # return render(request, 'product.html', locals())
+
+
+def view_product_detail(request):
+    product_name = request.GET['product_name']
+    product_obj = Product.objects.filter(p_name=product_name).all()
+    json_product_obj = serializers.serialize('json', product_obj)
+    return HttpResponse(json_product_obj, "application/json")
