@@ -70,9 +70,15 @@ def view_product_detail(request):
     #     for dict_product_obj in product_obj:
     #         return render(request, 'detail.html', dict_product_obj)
     product_name = request.GET['product_name']
-    product_obj = Product.objects.get(p_name=product_name)
-    print(product_obj)
-    print(type(product_obj))
-    print(product_obj.id)
-    print(product_obj.p_name)
-    return HttpResponse('defd')
+    try:
+        try:
+            product_obj = Product.objects.get(p_name=product_name)
+        except Exception:
+            raise DoesNotExist('该产品不存在')
+    except DoesNotExist as e:
+        print(e.msg)
+        return HttpResponse(e.msg)
+    else:
+        dict_product_obj = {'p_name':product_obj.p_name, 'p_details':product_obj.p_details}
+        print(dict_product_obj)
+        return render(request, 'detail.html', dict_product_obj)
