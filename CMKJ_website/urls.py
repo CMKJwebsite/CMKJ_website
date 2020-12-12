@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^case/', include('case.urls')),
     url(r'^product/', include('product.urls')),
     url(r'^new_center/', include('new_center.urls')),
+    url(r'^userinfo/', include('userinfo.urls')),
 ]

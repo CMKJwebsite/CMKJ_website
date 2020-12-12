@@ -79,6 +79,6 @@ def view_product_detail(request):
         print(e.msg)
         return HttpResponse(e.msg)
     else:
-        dict_product_obj = {'p_name':product_obj.p_name, 'p_details':product_obj.p_details}
+        dict_product_obj = {'p_name': product_obj.p_name, 'p_details': product_obj.p_details}
         print(dict_product_obj)
         return render(request, 'detail.html', dict_product_obj)

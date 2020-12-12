@@ -35,19 +35,19 @@ def view_case_detail(request):
     查看案例详情
     """
     case_name = request.GET['case_name']
-    # try:
-    #     try:
-    #         case_obj = Case.objects.get(c_name=case_name)
-    #     except Exception:
-    #         raise DoesNotExist('案例不存在')
-    # except DoesNotExist as e:
-    #     print(e.msg)
-    #     return HttpResponse(e.msg)
-    # else:
-    #     dict_case_obj = model_to_dict(case_obj)
-    #     # print(dict_case_obj)
-    #     return render(request, 'detail.html', dict_case_obj)
-    case_obj = Case.objects.filter(c_name=case_name)
-    json_cases = serializers.serialize('json', case_obj)
-    print(case_obj)
-    return HttpResponse(json_cases, "application/json")
+    try:
+        try:
+            case_obj = Case.objects.get(c_name=case_name)
+        except Exception:
+            raise DoesNotExist('案例不存在')
+    except DoesNotExist as e:
+        print(e.msg)
+        return HttpResponse(e.msg)
+    else:
+        dict_case_obj = model_to_dict(case_obj)
+        print(dict_case_obj)
+        return render(request, 'detail.html', dict_case_obj)
+    # case_obj = Case.objects.filter(c_name=case_name)
+    # json_cases = serializers.serialize('json', case_obj)
+    # print(case_obj)
+    # return HttpResponse(json_cases, "application/json")
