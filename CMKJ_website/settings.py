@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'case',
     'product',
     'new_center',
+    'DjangoUeditor',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,15 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
+
+# UEDITOR_SETTINGS = {
+#     'toolbars':
+#     'images_upload':
+#     'files_upload':
+#     'image_manager':
+# }
+
+
+# DjangoEditor上传目录配置
+MEDIA_URL = '/static/upload/'
+MEDIA_ROOT = BASE_DIR+'/static/upload/'

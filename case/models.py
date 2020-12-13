@@ -1,4 +1,5 @@
 from django.db import models
+from DjangoUeditor.models import UEditorField
 
 # Create your models here.
 
@@ -16,7 +17,10 @@ class Case(models.Model):
     c_introduction = models.CharField(verbose_name='客户介绍', max_length=250, default='')
     c_background = models.CharField(verbose_name='项目背景', max_length=250, default='')
     c_challenge = models.CharField(verbose_name='项目挑战', max_length=250, default='')
-    c_details = models.TextField(verbose_name='项目详情', max_length=250, default='')
+    c_details = UEditorField(verbose_name='案例详情', width=600, height=300, toolbars="full", imagePath="static/images",
+                             filePath="static/files", upload_settings={"imageMaxSize": 1204000,
+                                                                       "fileManagerListPath": 1204000},
+                             settings={}, command=None, blank=True)
     c_highlights = models.CharField(verbose_name='项目亮点', max_length=250, default='')
     c_reviews = models.CharField(verbose_name='客户评价', max_length=250, default='')
     c_picture = models.ImageField(verbose_name='项目照片', upload_to='Stage/Project/CMKJ_website/static/images')

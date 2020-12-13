@@ -5,6 +5,9 @@ from .models import Case
 
 
 class CaseManager(admin.ModelAdmin):
+    """
+    注册model
+    """
     # 设置列表可显示的字段
     list_display = ['id', 'c_name', 'c_category', 'c_introduction', 'c_background', 'c_challenge', 'c_details',
                     'c_highlights', 'c_reviews', 'c_picture']
@@ -14,3 +17,5 @@ class CaseManager(admin.ModelAdmin):
 
 
 admin.site.register(Case, CaseManager)
+admin.site.site_header = '陕西慈铭科技有限公司官网后台管理'  # 设置header
+admin.site.site_title = '陕西慈铭科技有限公司'  # 设置title
