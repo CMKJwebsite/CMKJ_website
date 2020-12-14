@@ -1,4 +1,5 @@
 from django.db import models
+from DjangoUeditor.models import UEditorField
 
 # Create your models here.
 
@@ -10,7 +11,10 @@ class Service(models.Model):
     s_name = models.CharField(verbose_name='行业服务名称', max_length=50, default='')
     s_category = models.CharField(verbose_name='行业服务分类', max_length=50, default='')
     s_introduction = models.CharField(verbose_name='服务介绍', max_length=250, default='')
-    s_details = models.TextField(verbose_name='服务详情', max_length=250, default='')
+    s_details = UEditorField(verbose_name='行业服务详情', width=600, height=300, toolbars="full", imagePath="service_images/",
+                             filePath="service_files/", upload_settings={"imageMaxSize": 1204000,
+                                                                         "fileManagerListPath": 1204000},
+                             settings={}, command=None, blank=True)
 
     class Meta:
         db_table = 'Service'

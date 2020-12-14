@@ -130,17 +130,29 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/static/'  # 调用时目录
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
+    os.path.join(BASE_DIR, "static")  # 具体路径
 ]
 
-# UEDITOR_SETTINGS = {
-#     'toolbars':
-#     'images_upload':
-#     'files_upload':
-#     'image_manager':
-# }
+UPLOAD_DIRS = os.path.join(BASE_DIR, 'static/images')
+
+UEDITOR_SETTINGS = {
+    'toolbars': {  # 定义多个工具栏显示的按钮，允行定义多个
+
+    },
+    'images_upload': {
+        "allow_type": "jpg,png",  # 定义允许的上传的图片类型
+        "max_size": "0"  # 定义允许上传的图片大小，0代表不限制
+    },
+    'files_upload': {
+        "allow_type": "zip,rar",  # 定义允许的上传的文件类型
+        "max_size": "0"  # 定义允许上传的文件大小，0代表不限制
+    },
+    'image_manager': {
+        "location": ""  # 图片管理器的位置,如果没有指定，默认跟图片路径上传一样
+    }
+}
 
 
 # DjangoEditor上传目录配置

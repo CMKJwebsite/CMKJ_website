@@ -1,4 +1,5 @@
 from django.db import models
+from DjangoUeditor.models import UEditorField
 
 # Create your models here.
 
@@ -13,7 +14,7 @@ class ProductCategory(models.Model):
     c_category_description = models.CharField(verbose_name='分类描述', max_length=250, default='')
     c_SEO_title = models.CharField(verbose_name='SEO标题', max_length=50, default='')
     c_SEO_Keyword = models.CharField(verbose_name='SEO关键字', max_length=250, default='')
-    c_category_thumbnail = models.ImageField(verbose_name='分类缩略图', upload_to='Stage/Project/CMKJ_website/static/images')
+    c_category_thumbnail = models.ImageField(verbose_name='分类缩略图', upload_to='product_category_images/')
     c_PC_advertisement = models.CharField(verbose_name='PC端广告', max_length=250, default='')
     c_Mobile_advertisement = models.CharField(verbose_name='移动端广告', max_length=250, default='')
 
@@ -36,8 +37,11 @@ class Product(models.Model):
     p_name = models.CharField(verbose_name='产品名称', max_length=50, default='')
     p_price = models.DecimalField(verbose_name='产品价格', max_digits=7, decimal_places=2, default=0)
     p_introduction = models.CharField(verbose_name='产品介绍', max_length=250, default='')
-    p_details = models.TextField(verbose_name='产品详情', max_length=250, default='')
-    p_picture = models.ImageField(verbose_name='产品图片', upload_to='Stage/Project/CMKJ_website/static/images')
+    p_details = UEditorField(verbose_name='产品详情', width=600, height=300, toolbars="full", imagePath="product_images/",
+                             filePath="product_files/", upload_settings={"imageMaxSize": 1204000,
+                                                                         "fileManagerListPath": 1204000},
+                             settings={}, command=None, blank=True)
+    p_picture = models.ImageField(verbose_name='产品图片', upload_to='product_images/')
     p_category_name = models.ManyToManyField(to=ProductCategory, related_name='category_name')
 
     class Meta:
