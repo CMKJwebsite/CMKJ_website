@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Case
+from .models import CaseInfo
 from django.core import serializers
 from django.http import HttpResponse
 from django.forms.models import model_to_dict
@@ -24,7 +24,7 @@ def view_case(request):
     """
     查看所有案例
     """
-    cases = Case.objects.all()
+    cases = CaseInfo.objects.all()
     json_cases = serializers.serialize('json', cases)
     return HttpResponse(json_cases, "application/json")
     # return render(request, 'case.html', locals())
@@ -37,7 +37,7 @@ def view_case_detail(request):
     case_name = request.GET['case_name']
     try:
         try:
-            case_obj = Case.objects.get(c_name=case_name)
+            case_obj = CaseInfo.objects.get(c_name=case_name)
         except Exception:
             raise DoesNotExist('案例不存在')
     except DoesNotExist as e:

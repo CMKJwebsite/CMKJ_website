@@ -135,7 +135,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")  # 具体路径
 ]
 
-UPLOAD_DIRS = os.path.join(BASE_DIR, 'static/images')
+# UPLOAD_DIRS = os.path.join(BASE_DIR, 'static/images')
 
 UEDITOR_SETTINGS = {
     'toolbars': {  # 定义多个工具栏显示的按钮，允行定义多个

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Case
+from .models import CaseInfo
 
 # Register your models here.
 
@@ -16,6 +16,6 @@ class CaseManager(admin.ModelAdmin):
     search_fields = ['id', 'c_name']
 
 
-admin.site.register(Case, CaseManager)
+admin.site.register(CaseInfo, CaseManager)
 admin.site.site_header = '陕西慈铭科技有限公司官网后台管理'  # 设置header
 admin.site.site_title = '陕西慈铭科技有限公司'  # 设置title

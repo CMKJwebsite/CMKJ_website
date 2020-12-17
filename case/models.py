@@ -4,7 +4,7 @@ from DjangoUeditor.models import UEditorField
 # Create your models here.
 
 
-class Case(models.Model):
+class CaseInfo(models.Model):
     """
     案例表
     """
@@ -26,7 +26,7 @@ class Case(models.Model):
     c_picture = models.ImageField(verbose_name='项目照片', upload_to='project_images/')
 
     class Meta:
-        db_table = 'Case'
+        db_table = 'CaseInfo'
         verbose_name_plural = '案例表'
 
     def __str__(self):
