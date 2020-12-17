@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .models import UserInfo
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password, check_password
+from django.http import HttpResponse
 
 # Create your views here.
 
@@ -15,10 +16,24 @@ def back_index(request):
     return render(request, 'index.html')
 
 
-# def
+def check_register_username(request):
+    """
+    检查注册时用户名是否已经存在
+    """
+    if request.method == 'GET':
+        return render(request, 'register.html')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        user = User.objects.filter(username=username).all()
+        if user:
+            return HttpResponse('1')
+        return HttpResponse('0')
 
 
 def register_user(request):
+    """
+    注册，写入数据库
+    """
     if request.method == 'GET':
         return render(request, 'register.html')
     if request.method == 'POST':
