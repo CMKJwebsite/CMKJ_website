@@ -5,6 +5,11 @@ from .models import UserInfo
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from utils.response_code import ResponseCode, error_map
+from utils.json_response import json_response
+import re
 
 # Create your views here.
 
@@ -12,22 +17,79 @@ from django.http import HttpResponse
 def back_index(request):
     """
     返回index页面
+    @param request:
+    @return:
     """
     return render(request, 'index.html')
 
 
 def check_register_username(request):
     """
-    检查注册时用户名是否已经存在
+    检查注册时用户名
+    @param request:
+    @return:
     """
     if request.method == 'GET':
         return render(request, 'register.html')
     if request.method == 'POST':
-        username = request.POST.get('username')
-        user = User.objects.filter(username=username).all()
-        if user:
-            return HttpResponse('1')
-        return HttpResponse('0')
+        username = request.POST.get('username', '')
+        if username:
+            if 2 < len(username) < 16:
+                regex = re.compile(r'^[a-zA-Z][a-zA-Z0-9_-]{3,15}$')
+                user_format = regex.search(username)
+                if user_format:
+                    user = User.objects.filter(username=username).all()
+                    if user:
+                        return json_response(error_number=ResponseCode.OK, error_message=error_map[ResponseCode.OK])
+                    return json_response(error_number=ResponseCode.USERNAMEEXIST,
+                                         error_message=error_map[ResponseCode.USERNAMEEXIST])
+                else:
+                    return json_response(error_number=ResponseCode.USERNAMEFORMAT,
+                                         error_message=error_map[ResponseCode.USERNAMEFORMAT])
+            else:
+                return json_response(error_number=ResponseCode.USERNAMELENGTH,
+                                     error_message=error_map[ResponseCode.USERNAMELENGTH])
+        else:
+            return json_response(error_number=ResponseCode.USERNAMEEMPTY,
+                                 error_message=error_map[ResponseCode.USERNAMEEMPTY])
+
+
+def check_register_email(request):
+    """
+    检查注册时邮箱格式是否正确
+    @param request:
+    @return:
+    """
+    if request.method == 'GET':
+        return render(request, 'register.html')
+    if request.method == 'POST':
+        email = request.POST.get('email', '')
+        if email:
+            try:
+                validate_email(email)
+                return json_response(error_number=ResponseCode.OK, error_message=error_map[ResponseCode.OK])
+            except ValidationError:
+                return json_response(error_number=ResponseCode.USEREMAILERROR,
+                                     error_message=error_map[ResponseCode.USEREMAILERROR])
+        else:
+            return json_response(error_number=ResponseCode.USEREMAILEMPTY,
+                                 error_message=error_map[ResponseCode.USEREMAILEMPTY])
+
+
+def check_register_telephone(request):
+    """
+    检查注册时电话号码格式是否正确
+    """
+    if request.method == 'GET':
+        return render(request, 'register.html')
+    if request.method == 'POST':
+        telephone = request.POST.get('telephone')
+        u_telephone = UserInfo.objects.filter().all()
+        if u_telephone:
+            return json_response(error_number=ResponseCode.OK, error_message=error_map[ResponseCode.OK])
+        else:
+            return json_response(error_number=ResponseCode.USERTELEPHONEERROR,
+                                 error_message=error_map[ResponseCode.USERTELEPHONEERROR])
 
 
 def register_user(request):

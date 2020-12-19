@@ -8,7 +8,7 @@ class UserInfo(models.Model):
     用户基础信息表
     """
     u_user = models.OneToOneField(User, on_delete=models.CASCADE)
-    u_telephone = models.CharField(verbose_name='手机号码', max_length=50, default='')
+    u_telephone = models.CharField(verbose_name='手机号码', max_length=50, default='', unique=True)
 
     class Meta:
         db_table = 'UserInfo'
