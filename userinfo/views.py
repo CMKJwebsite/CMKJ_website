@@ -230,24 +230,24 @@ def register_user(request):
         return redirect('/login')
 
 
-def login_user(request):
-    if request.method == 'GET':
-        return render(request, 'login.html')
-    if request.method == 'POST':
-        # username = request.POST['username']
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        # 利用authenticate实现验证
-        user = authenticate(username=username, password=password)
-        if user:
-            # 验证通过，利用login进行登录
-            login(request, user)
-            return redirect('/index')
-        else:
-            error_msg = '用户名或密码错误'
-            return render(request, 'login.html', {"error_msg": error_msg})
+# def login_user(request):
+#     if request.method == 'GET':
+#         return render(request, 'login.html')
+#     if request.method == 'POST':
+#         # username = request.POST['username']
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#         # 利用authenticate实现验证
+#         user = authenticate(username=username, password=password)
+#         if user:
+#             # 验证通过，利用login进行登录
+#             login(request, user)
+#             return redirect('/index')
+#         else:
+#             error_msg = '用户名或密码错误'
+#             return render(request, 'login.html', {"error_msg": error_msg})
 
 
-def logout_user(request):
-    logout(request)
-    return redirect('/login')
+# def logout_user(request):
+#     logout(request)
+#     return redirect('/login')
