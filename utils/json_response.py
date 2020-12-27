@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from .response_code import ResponseCode
 
 
-def json_response(error_number=ResponseCode, error_message='', data=None, kwargs=None):
+def json_response(error_number=ResponseCode, error_message='', data=None, **kwargs):
     """
     该方法实现的目的是为了使json数据在传输过程中,能够携带错误代码之类的信息
     :param error_number: 错误代码
@@ -12,11 +12,11 @@ def json_response(error_number=ResponseCode, error_message='', data=None, kwargs
     :return: 返回的相当于是我们处理好的json响应
     """
     json_dict = {
-        'error_number': error_number,
-        'error_message': error_message,
-        'data': data
+        "error_number": error_number,
+        "error_message": error_message,
+        "data": data,
     }
     if kwargs and isinstance(kwargs, dict):
-        # 判断kwargs中是否有传输数据信息, 有则更新我们已有的信息
-        json_dict.update(kwargs)
-    return JsonResponse(json_dict)
+        # 判断**kwargs中是否有传输数据信息, 有则更新我们已有的信息
+        json_dict.update(**kwargs)
+    return JsonResponse(json_dict, json_dumps_params={'ensure_ascii': False})

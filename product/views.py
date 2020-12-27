@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.views.generic import ListView
 from .models import Product
 from .models import ProductCategory
 from django.core import serializers
@@ -6,7 +7,6 @@ from django.http import HttpResponse
 from utils.json_response import json_response
 from utils.response_code import ResponseCode, error_map
 from django.core.exceptions import ObjectDoesNotExist
-import json
 # Create your views here.
 
 
@@ -16,7 +16,7 @@ def back_index(request):
     @param request:
     @return:
     """
-    return render(request, 'index.html')
+    return render(request, 'homepage/index.html')
 
 
 def view_product(request):
@@ -28,11 +28,22 @@ def view_product(request):
     products = Product.objects.all()
     if products:
         json_products = serializers.serialize('json', products)
-        return HttpResponse(json_products, "application/json")
-        # return render(request, 'product.html', locals())
+        # return HttpResponse(json_products, "application/json,charset=utf-8")
+        return render(request, 'product/product.html', locals())
     else:
         return json_response(error_number=ResponseCode.NOPRODUCTDATA,
                              error_message=error_map[ResponseCode.NOPRODUCTDATA])
+
+
+class ProductView(ListView):
+    """
+    按照产品分类查看产品
+    """
+    template_name = 'product/product.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        return Product.objects.all()
 
 
 def view_product_category(request):
@@ -54,7 +65,23 @@ def view_product_category(request):
     else:
         json_category_obj = serializers.serialize('json', category_obj)
         return HttpResponse(json_category_obj, "application/json")
-        # return render(request, 'product.html', locals())
+        # return render(request, 'product.html', json_category_obj)
+
+
+class ProductCategoryView(ListView):
+    """
+    按照产品分类查看产品
+    """
+    template_name = 'product/product.html'
+    context_object_name = 'json_category_obj'
+
+    def get_queryset(self):
+        category = self.request.GET['category']
+        try:
+            return ProductCategory.objects.get(c_category_name=category).category_name.all()
+        except ObjectDoesNotExist:
+            return json_response(error_number=ResponseCode.NOPRODUCTDATA,
+                                 error_message=error_map[ResponseCode.NOPRODUCTDATA])
 
 
 def view_product_detail(request):
@@ -63,7 +90,9 @@ def view_product_detail(request):
     @param request:
     @return:
     """
-    product_name = request.GET['product_name']
+    # product_name = request.GET['product_name']
+    product_name = request.POST.get('product_name')
+    print(product_name)
     try:
         product_obj = Product.objects.get(p_name=product_name)
     except ObjectDoesNotExist:
@@ -71,4 +100,4 @@ def view_product_detail(request):
                              error_message=error_map[ResponseCode.NOPRODUCTDATA])
     else:
         dict_product_obj = {'p_name': product_obj.p_name, 'p_details': product_obj.p_details}
-        return render(request, 'detail.html', dict_product_obj)
+        return render(request, 'product/detail.html', dict_product_obj)

@@ -16,7 +16,7 @@ def back_index(request):
     """
     返回index页面
     """
-    return render(request, 'index.html')
+    return render(request, 'homepage/index.html')
 
 
 def view_service(request):
@@ -26,7 +26,7 @@ def view_service(request):
     services = Service.objects.all()
     json_services = serializers.serialize('json', services)
     return HttpResponse(json_services, "application/json")
-    # return render(request, 'service.html', locals())
+    # return render(request, 'service/service.html', locals())
 
 
 def view_service_detail(request):
@@ -45,7 +45,7 @@ def view_service_detail(request):
     else:
         dict_service_obj = {'s_name': service_obj.s_name, 's_details': service_obj.s_details}
         print(dict_service_obj)
-        return render(request, 'detail.html', dict_service_obj)
+        return render(request, 'product/detail.html', dict_service_obj)
     # case_obj = Case.objects.filter(c_name=case_name)
     # json_cases = serializers.serialize('json', case_obj)
     # print(case_obj)
