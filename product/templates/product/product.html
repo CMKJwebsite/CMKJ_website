@@ -6,38 +6,41 @@
 </head>
 <body>
 {% if products %}
-    {% if products %}
+    {% if products.all != None %}
         <ul>
-        {% for product in products %}
-            <li><a href="{% url 'product:product_name' %}">{{ product.p_name }}</a></li>
-            <li>{{ product.p_price }}</li>
-            <li>{{ product.p_introduction }}</li>
-            <li>{{ product.p_details }}</li>
-            <li>{{ product.p_picture }}</li>
-            <li>{{ product.p_category_name }}</li>
-        {% endfor %}
+            {% for product in products %}
+                <li>{{ product.p_name }}</li>
+                <li>{{ product.p_price }}</li>
+                <li>{{ product.p_introduction }}</li>
+                <li>{{ product.p_details }}</li>
+                <li>{{ product.p_picture }}</li>
+                <li>{{ product.p_category_name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <ul>
+            <li>error_number: {{ category_obj.error_number }}</li>
+            <li>error_message: {{ category_obj.error_message }}</li>
         </ul>
     {% endif %}
-{% elif json_category_obj %}
-    {% if json_category_obj %}
+{% elif category_obj %}
+    {% if category_obj.all != None %}
         <ul>
-        {% for product in json_category_obj %}
-            <li><a href="{% url 'product:product_name' %}">{{ product.p_name }}</a></li>
-            <li>{{ product.p_price }}</li>
-            <li>{{ product.p_introduction }}</li>
-            <li>{{ product.p_details }}</li>
-            <li>{{ product.p_picture }}</li>
-            <li>{{ product.p_category_name }}</li>
-        {% endfor %}
+            {% for product in category_obj %}
+                <li>{{ product.p_name }}</li>
+                <li>{{ product.p_price }}</li>
+                <li>{{ product.p_introduction }}</li>
+                <li>{{ product.p_details }}</li>
+                <li>{{ product.p_picture }}</li>
+                <li>{{ product.p_category_name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <ul>
+            <li>error_number: {{ category_obj.error_number }}</li>
+            <li>error_message: {{ category_obj.error_message }}</li>
         </ul>
     {% endif %}
-{% else %}
-    <ul>
-        {% for product in product_category %}
-            <li><a href="{% url 'product:product_name' %}">{{ product.error_number }}</a></li>
-            <li>{{ product.error_message }}</li>
-        {% endfor %}
-    </ul>
 {% endif %}
 </body>
 </html>

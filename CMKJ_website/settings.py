@@ -61,7 +61,7 @@ ROOT_URLCONF = 'CMKJ_website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates")],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -88,6 +88,9 @@ DATABASES = {
                 'PASSWORD': 'cmkj_website',
                 'HOST': '39.107.116.88',
                 'PORT': 3306,
+                'OPTIONS': {
+                    'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+                },
     }
 }
 

@@ -7,11 +7,11 @@ def back_index(request):
     """
     返回index页面
     """
-    return render(request, 'index.html')
+    return render(request, 'homepage/index.html')
 
 
 def about(request):
     """
     查看about页面
     """
-    return render(request, 'about.html')
+    return render(request, 'about/about.html')

@@ -5,6 +5,8 @@ class ResponseCode:
     """
     OK = "0"
     NOPRODUCTDATA = "1"
+    NOCASEDATA = "19"
+    NOSERVICEDATA = "20"
     # DBERROR = "4001"
     # NODATA = "4002"
     # DATAEXIST = "4003"
@@ -42,6 +44,8 @@ error_map = {
     # 错误信息,与错误代码对应
     ResponseCode.OK: "成功",
     ResponseCode.NOPRODUCTDATA: "无产品数据",
+    ResponseCode.NOCASEDATA: "无案例数据",
+    ResponseCode.NOSERVICEDATA: "无服务数据",
     # ResponseCode.DBERROR: "数据库查询错误",
     # ResponseCode.DATAEXIST: "数据已存在",
     # ResponseCode.DATAERR: "数据错误",

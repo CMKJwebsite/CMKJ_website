@@ -4,4 +4,4 @@ from django.shortcuts import render
 
 
 def new_center(request):
-    return render(request, 'new_center.html')
+    return render(request, 'new_center/new_center.html')

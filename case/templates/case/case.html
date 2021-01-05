@@ -5,6 +5,26 @@
     <title>case</title>
 </head>
 <body>
-
+{% if cases.all != None %}
+    <ul>
+        {% for case in cases %}
+            <li>{{ case.c_name }}</li>
+            <li>{{ case.c_category }}</li>
+            <li>{{ case.c_introduction }}</li>
+            <li>{{ case.c_background }}</li>
+            <li>{{ case.c_challenge }}</li>
+            <li>{{ case.c_details }}</li>
+            <li>{{ case.c_highlights }}</li>
+            <li>{{ case.c_reviews }}</li>
+            <li>{{ case.c_picture }}</li>
+            <h1></h1>
+        {% endfor %}
+    </ul>
+{% else %}
+    <ul>
+        <li>error_number: {{ cases.error_number }}</li>
+        <li>error_message: {{ cases.error_message }}</li>
+    </ul>
+{% endif %}
 </body>
 </html>

@@ -5,6 +5,21 @@
     <title>service</title>
 </head>
 <body>
-
+{% if services.all != None %}
+    <ul>
+        {% for service in services %}
+            <li>{{ service.s_name }}</li>
+            <li>{{ service.s_category }}</li>
+            <li>{{ service.s_introduction }}</li>
+            <li>{{ service.s_details }}</li>
+            <h1></h1>
+        {% endfor %}
+    </ul>
+{% else %}
+    <ul>
+        <li>error_number: {{ services.error_number }}</li>
+        <li>error_message: {{ services.error_message }}</li>
+    </ul>
+{% endif %}
 </body>
 </html>

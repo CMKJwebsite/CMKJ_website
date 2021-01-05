@@ -5,6 +5,26 @@
     <title>detail</title>
 </head>
 <body>
-
+{% if p_name %}
+    <ul>
+        <li>{{ p_name }}</li>
+        <li>{{ p_details }}</li>
+    </ul>
+{% elif c_name %}
+    <ul>
+        <li>{{ c_name }}</li>
+        <li>{{ c_details }}</li>
+    </ul>
+{% elif s_name %}
+    <ul>
+        <li>{{ s_name }}</li>
+        <li>{{ s_details }}</li>
+    </ul>
+{% else %}
+    <ul>
+        <li>{{ error_number }}</li>
+        <li>{{ error_message }}</li>
+    </ul>
+{% endif %}
 </body>
 </html>

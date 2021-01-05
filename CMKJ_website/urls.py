@@ -18,9 +18,9 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^ueditor/', include('DjangoUeditor.urls')),
     url(r'^admin/', admin.site.urls),
     url(r"^$", views.index),
+    url(r'^ueditor/', include('DjangoUeditor.urls')),
     url(r'^about/', include('about.urls')),
     url(r'^service/', include('service.urls')),
     url(r'^case/', include('case.urls')),
